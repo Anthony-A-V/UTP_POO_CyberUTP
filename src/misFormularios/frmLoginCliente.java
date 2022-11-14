@@ -12,7 +12,7 @@ import misClases.UsuarioCliente;
  */
 public class frmLoginCliente extends javax.swing.JFrame {
 
-    public static int idUsuario;
+    public static String cliente;
 
     /**
      * Creates new form frmInicioSesion
@@ -168,13 +168,13 @@ public class frmLoginCliente extends javax.swing.JFrame {
         usuario = txtUsuario.getText();
         clave = String.valueOf(txtClave.getPassword());
 
-        UsuarioCliente objUsuarioCliente1 = new UsuarioCliente(usuario, clave);
+        UsuarioCliente objUsuarioCliente = new UsuarioCliente(usuario, clave);
 
-        boolean sesion = objUsuarioCliente1.iniciarSesion();
+        boolean sesion = objUsuarioCliente.iniciarSesion();
 
         if (sesion == true) {
             this.setVisible(false);
-            idUsuario = objUsuarioCliente1.obtenerId();
+            cliente = objUsuarioCliente.getUsuario();
             new frmInicioCliente().setVisible(true);
         } else {
             lblMensajeInicio.setText("Usuario y/o Clave incorrectos");

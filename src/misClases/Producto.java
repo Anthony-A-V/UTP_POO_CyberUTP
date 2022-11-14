@@ -14,22 +14,22 @@ public class Producto {
     private int idProducto;
     private String nombreProducto;
     private String categoria;
-    private int cantidad;
     private double precio;
+    private int stock;
+    private int cantidad;
     private byte[] imagen;
 
     public Producto() {
-
     }
 
     public Producto(int idProducto) {
         this.idProducto = idProducto;
     }
 
-    public Producto(String nombreProducto, String categoria, int cantidad, double precio) {
+    public Producto(String nombreProducto, String categoria, int stock, double precio) {
         this.nombreProducto = nombreProducto;
         this.categoria = categoria;
-        this.cantidad = cantidad;
+        this.stock = stock;
         this.precio = precio;
     }
 
@@ -57,12 +57,12 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getStock() {
+        return stock;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public double getPrecio() {
@@ -71,6 +71,14 @@ public class Producto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public byte[] getImagen() {
@@ -88,12 +96,12 @@ public class Producto {
 
         try {
             String SQL = "insert into producto "
-                    + "(NombreProducto, Categoria, Cantidad, Precio)"
+                    + "(NombreProducto, Categoria, Stock, Precio)"
                     + "values (?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(SQL);
             pst.setString(1, getNombreProducto());
             pst.setString(2, getCategoria());
-            pst.setInt(3, getCantidad());
+            pst.setInt(3, getStock());
             pst.setDouble(4, getPrecio());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Producto registrado");
@@ -107,7 +115,7 @@ public class Producto {
         ConexionBD cc = new ConexionBD();
         Connection con = cc.getConexion();
 
-        String[] cabecera = { "IdProducto", "NombreProducto", "Categoria", "Cantidad", "Precio" };
+        String[] cabecera = { "IdProducto", "NombreProducto", "Categoria", "Stock", "Precio" };
         String[] registros = new String[10];
         DefaultTableModel modelo = new DefaultTableModel(null, cabecera);
 
@@ -121,7 +129,7 @@ public class Producto {
                 registros[0] = rs.getString("IdProducto");
                 registros[1] = rs.getString("NombreProducto");
                 registros[2] = rs.getString("Categoria");
-                registros[3] = rs.getString("Cantidad");
+                registros[3] = rs.getString("Stock");
                 registros[4] = rs.getString("Precio");
                 modelo.addRow(registros);
             }
@@ -138,7 +146,7 @@ public class Producto {
 
         try {
             String SQL = "update producto set"
-                    + " NombreProducto = ?, Categoria = ?, Cantidad = ?, Precio = ?"
+                    + " NombreProducto = ?, Categoria = ?, Stock = ?, Precio = ?"
                     + " where IdProducto = ?;";
             int filaSeccionada = tblProductos.getSelectedRow();
             String id = (String) tblProductos.getValueAt(filaSeccionada, 0);
@@ -146,7 +154,7 @@ public class Producto {
             PreparedStatement pst = con.prepareStatement(SQL);
             pst.setString(1, getNombreProducto());
             pst.setString(2, getCategoria());
-            pst.setInt(3, getCantidad());
+            pst.setInt(3, getStock());
             pst.setDouble(4, getPrecio());
             pst.setString(5, id);
             pst.execute();
@@ -180,7 +188,7 @@ public class Producto {
         ConexionBD cc = new ConexionBD();
         Connection con = cc.getConexion();
 
-        String[] cabecera = { "IdProducto", "NombreProducto", "Categoria", "Cantidad", "Precio" };
+        String[] cabecera = { "IdProducto", "NombreProducto", "Categoria", "Stock", "Precio" };
         String[] registros = new String[10];
         DefaultTableModel modelo = new DefaultTableModel(null, cabecera);
 
@@ -195,7 +203,7 @@ public class Producto {
                 registros[0] = rs.getString("IdProducto");
                 registros[1] = rs.getString("NombreProducto");
                 registros[2] = rs.getString("Categoria");
-                registros[3] = rs.getString("Cantidad");
+                registros[3] = rs.getString("Stock");
                 registros[4] = rs.getString("Precio");
                 modelo.addRow(registros);
             }
@@ -224,7 +232,7 @@ public class Producto {
                 objProducto.setIdProducto(rs.getInt("IdProducto"));
                 objProducto.setNombreProducto(rs.getString("NombreProducto"));
                 objProducto.setCategoria(rs.getString("Categoria"));
-                objProducto.setCantidad(rs.getInt("Cantidad"));
+                objProducto.setStock(rs.getInt("Stock"));
                 objProducto.setPrecio(rs.getDouble("Precio"));
                 objProducto.setImagen(rs.getBytes("Imagen"));
 
@@ -239,6 +247,6 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", categoria="
-                + categoria + ", cantidad=" + cantidad + ", precio=" + precio + ", image=" + imagen + '}';
+                + categoria + ", stock=" + stock + ", precio=" + precio + ", image=" + imagen + '}';
     }
 }

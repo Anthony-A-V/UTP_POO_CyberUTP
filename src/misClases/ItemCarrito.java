@@ -33,10 +33,10 @@ public class ItemCarrito extends javax.swing.JPanel {
 
     public void deleteProducto() {
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        ((frmInicioCliente) topFrame).eliminarProductoCarrito(this);
+        ((frmInicioCliente) topFrame).eliminarProductoCarrito(this, precioProductoCarrito());
     }
 
-    public double precioProductoCarrito(){
+    public double precioProductoCarrito() {
         double precio = 0;
         precio = (double) producto.getPrecio() * producto.getCantidad();
         return precio;
@@ -54,6 +54,7 @@ public class ItemCarrito extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -62,7 +63,7 @@ public class ItemCarrito extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         lblCantidad = new javax.swing.JLabel();
 
-        setMaximumSize(new java.awt.Dimension(475, 40));
+        setMaximumSize(new java.awt.Dimension(475, 60));
         setPreferredSize(new java.awt.Dimension(453, 40));
 
         Producto.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
@@ -95,7 +96,7 @@ public class ItemCarrito extends javax.swing.JPanel {
                 .addComponent(lblCantidad)
                 .addGap(59, 59, 59)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

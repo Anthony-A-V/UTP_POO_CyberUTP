@@ -12,6 +12,8 @@ import misClases.UsuarioEmpleado;
  */
 public class frmLoginEmpleado extends javax.swing.JFrame {
 
+    public static String empleado;
+
     /**
      * Creates new form frmLoginCliente
      */
@@ -162,12 +164,13 @@ public class frmLoginEmpleado extends javax.swing.JFrame {
         codEmpleado = txtCodEmpleado.getText();
         clave = String.valueOf(txtClave.getPassword());
 
-        UsuarioEmpleado objUsuarioEmpleado1 = new UsuarioEmpleado(codEmpleado, clave);
+        UsuarioEmpleado objUsuarioEmpleado = new UsuarioEmpleado(codEmpleado, clave);
 
-        boolean sesion = objUsuarioEmpleado1.iniciarSesion();
+        boolean sesion = objUsuarioEmpleado.iniciarSesion();
 
         if (sesion == true) {
             this.setVisible(false);
+            empleado = objUsuarioEmpleado.obtenerNombreEmpleado();
             new frmInicioEmpleado().setVisible(true);
         } else {
             lblMensajeInicio.setText("Código Empleado y/o Clave incorrectos");

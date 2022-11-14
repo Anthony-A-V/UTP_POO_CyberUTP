@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
 public class UsuarioEmpleado extends Usuario {
 
     private int idEmpleado;
-    String nombres;
-    String apellidos;
+    private String nombres;
+    private String apellidos;
 
     public UsuarioEmpleado() {
         super();
@@ -31,7 +31,6 @@ public class UsuarioEmpleado extends Usuario {
         super(clave);
         this.nombres = nombres;
         this.apellidos = apellidos;
-
     }
 
     public String getNombres() {
@@ -196,6 +195,28 @@ public class UsuarioEmpleado extends Usuario {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
+    }
+
+    public String obtenerNombreEmpleado() {
+
+        ConexionBD cc = new ConexionBD();
+        Connection con = cc.getConexion();
+        String nom = "";
+
+        String consulta = "select Nombres from empleado where idEmpleado = ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(consulta);
+            pst.setString(1, String.valueOf(getUsuario()));
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                nom = rs.getString("Nombres");
+                return nom;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+        return nom;
     }
 
 }
