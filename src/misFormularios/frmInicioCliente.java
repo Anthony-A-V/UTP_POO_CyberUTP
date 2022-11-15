@@ -73,7 +73,6 @@ public class frmInicioCliente extends javax.swing.JFrame {
                                 }
                                 return true;
                         }
-
                 }
                 return false;
         }
