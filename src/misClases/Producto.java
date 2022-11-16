@@ -1,5 +1,6 @@
 package misClases;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,20 +90,21 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    public void insertarDatos() {
+    public void insertarDatos(InputStream is) {
 
         ConexionBD cc = new ConexionBD();
         Connection con = cc.getConexion();
 
         try {
             String SQL = "insert into producto "
-                    + "(NombreProducto, Categoria, Stock, Precio)"
-                    + "values (?,?,?,?)";
+                    + "(NombreProducto, Categoria, Stock, Precio, Imagen)"
+                    + "values (?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(SQL);
             pst.setString(1, getNombreProducto());
             pst.setString(2, getCategoria());
             pst.setInt(3, getStock());
             pst.setDouble(4, getPrecio());
+            pst.setBlob(5, is);
             pst.execute();
             JOptionPane.showMessageDialog(null, "Producto registrado");
         } catch (Exception e) {

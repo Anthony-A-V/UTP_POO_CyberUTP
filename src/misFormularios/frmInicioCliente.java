@@ -109,6 +109,7 @@ public class frmInicioCliente extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -155,7 +156,7 @@ public class frmInicioCliente extends javax.swing.JFrame {
                 jPanel1.setLayout(jPanel1Layout);
                 jPanel1Layout.setHorizontalGroup(
                                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996,
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1042,
                                                                 Short.MAX_VALUE));
                 jPanel1Layout.setVerticalGroup(
                                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +189,7 @@ public class frmInicioCliente extends javax.swing.JFrame {
                 jPanel2Layout.setHorizontalGroup(
                                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                                                .addContainerGap(203, Short.MAX_VALUE)
+                                                                .addContainerGap(249, Short.MAX_VALUE)
                                                                 .addGroup(jPanel2Layout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.TRAILING)
                                                                                 .addGroup(jPanel2Layout
@@ -266,7 +267,8 @@ public class frmInicioCliente extends javax.swing.JFrame {
                                                                 .addGap(18, 18, 18)
                                                                 .addComponent(btnCerrar)
                                                                 .addGap(16, 16, 16))
-                                                .addComponent(tabCarrito));
+                                                .addComponent(tabCarrito, javax.swing.GroupLayout.DEFAULT_SIZE, 1042,
+                                                                Short.MAX_VALUE));
                 layout.setVerticalGroup(
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
