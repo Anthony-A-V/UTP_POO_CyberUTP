@@ -31,6 +31,7 @@ public class frmInicioCliente extends javax.swing.JFrame {
                 }
                 ;
                 listarProductos();
+                jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
         }
 
         public void listarProductos() {
