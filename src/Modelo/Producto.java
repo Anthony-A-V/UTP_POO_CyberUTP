@@ -8,7 +8,7 @@ public class Producto extends Conexion {
     private double precio;
     private int stock;
     private UsuarioEmpleado usuarioEmpleado;
-
+    //TEST (ANGEL)
     public Producto() {
     }
 
