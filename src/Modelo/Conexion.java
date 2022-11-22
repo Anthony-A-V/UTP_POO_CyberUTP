@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
 
     private String usuario = "root";
-    private String password = "$$abc123";
+    private String password = "123456789";
     private String url = "jdbc:mysql://localhost:3306/cyberutp?allowPublicKeyRetrieval=true&useSSL=false";
     public static Connection con;
 

@@ -13,5 +13,4 @@ public class UsuarioEmpleado extends Usuario {
     private String nombres;
     private String apellidos;
 
-    //qwe
 }
