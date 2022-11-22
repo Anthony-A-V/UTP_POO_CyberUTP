@@ -144,6 +144,8 @@ public class Controlador implements ActionListener, ChangeListener {
             if (validarCamposRegistro()) {
 
                 usuCli.setUsuario(frmReg.txtUsuario.getText());
+                usuCli.setNombres(String.valueOf(frmReg.txtNombres.getText()));
+                usuCli.setApellidos(String.valueOf(frmReg.txtApellidos.getText()));
                 usuCli.setClave(String.valueOf(frmReg.txtClave.getPassword()));
                 usuCli.setDireccion(frmReg.txtDireccion.getText());
                 usuCli.setDni(Integer.parseInt(frmReg.txtDni.getText()));
