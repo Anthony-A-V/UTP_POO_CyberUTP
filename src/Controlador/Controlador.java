@@ -325,6 +325,7 @@ public class Controlador implements ActionListener, ChangeListener {
                 prod.setCategoria(frmInicioE.txtCategoria.getText());
                 prod.setStock(Integer.parseInt(frmInicioE.txtStock.getText()));
                 prod.setPrecio(Double.parseDouble(frmInicioE.txtPrecio.getText()));
+                prod.setUsuarioEmpleado(usuEmp);
 
                 if (prodDao.crear(prod)) {
 

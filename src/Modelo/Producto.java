@@ -7,6 +7,7 @@ public class Producto extends Conexion {
     private String categoria;
     private double precio;
     private int stock;
+    private UsuarioEmpleado usuarioEmpleado;
 
     public Producto() {
     }
@@ -50,4 +51,13 @@ public class Producto extends Conexion {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    public UsuarioEmpleado getUsuarioEmpleado() {
+        return usuarioEmpleado;
+    }
+
+    public void setUsuarioEmpleado(UsuarioEmpleado usuarioEmpleado) {
+        this.usuarioEmpleado = usuarioEmpleado;
+    }
+
 }

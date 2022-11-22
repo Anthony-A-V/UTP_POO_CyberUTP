@@ -16,8 +16,8 @@ public class DAOProductoImpl implements DAOProducto {
     public boolean crear(Producto producto) {
 
         String consulta = "insert into producto "
-                + "(NombreProducto, Categoria, Stock, Precio)"
-                + "values (?,?,?,?)";
+                + "(NombreProducto, Categoria, Stock, Precio, IdEmpleado)"
+                + "values (?,?,?,?,?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
@@ -25,6 +25,7 @@ public class DAOProductoImpl implements DAOProducto {
             pst.setString(2, producto.getCategoria());
             pst.setInt(3, producto.getStock());
             pst.setDouble(4, producto.getPrecio());
+            pst.setInt(5, producto.getUsuarioEmpleado().getIdEmpleado());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Producto registrado");
             return true;
