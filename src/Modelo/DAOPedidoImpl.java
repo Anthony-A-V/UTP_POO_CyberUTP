@@ -24,7 +24,7 @@ public class DAOPedidoImpl implements DAOPedido {
             pst.setDouble(3, pedido.getIgv());
             pst.setDouble(4, pedido.getTotal());
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Pedido registrado");
+            // JOptionPane.showMessageDialog(null, "Pedido registrado");
             return true;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());

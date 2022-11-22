@@ -16,6 +16,7 @@ import Modelo.DAOProductoImpl;
 import Modelo.DAOUsuarioClienteImpl;
 import Modelo.DAOUsuarioEmpleadoImpl;
 import Modelo.DetallePedido;
+import Modelo.ICargarCombo;
 import Modelo.IPedidoExistente;
 import Modelo.Pedido;
 import Modelo.Producto;
@@ -108,8 +109,22 @@ public class Controlador implements ActionListener, ChangeListener {
                 frmLoginC.setVisible(false);
                 usuCliDao.buscar(usuCli);
                 frmInicioC.spnCantidad.setValue(1);
-                listarComboProd();
-                
+
+                // Función Lambda 1
+                ICargarCombo lambda1 = () -> {
+                    int i = 0;
+                    int numProd = prodDao.listar().size();
+                    String[] productos = new String[numProd];
+
+                    for (Producto p : prodDao.listar()) {
+                        productos[i] = p.getNombreProducto();
+                        i++;
+                    }
+                    DefaultComboBoxModel<String> comboModelo = new DefaultComboBoxModel<>(productos);
+                    frmInicioC.cboProductos.setModel(comboModelo);
+                };
+                lambda1.cargarCombo();
+
                 // Función Lambda 2
                 prodDao.listar().forEach((p) -> {
                     if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
@@ -404,8 +419,8 @@ public class Controlador implements ActionListener, ChangeListener {
 
             if (dp.getCantidad() != 0) {
 
-                // Función Lambda 1
-                IPedidoExistente lambda1 = (detPed) -> {
+                // Función Lambda 3
+                IPedidoExistente lambda3 = (detPed) -> {
                     for (DetallePedido p : listPedidos) {
 
                         if (p.getProducto().getNombreProducto().equals(detPed.getProducto().getNombreProducto())) {
@@ -417,7 +432,7 @@ public class Controlador implements ActionListener, ChangeListener {
                     }
                     return false;
                 };
-                if (!lambda1.pedidoExistente(dp)) {
+                if (!lambda3.pedidoExistente(dp)) {
 
                     listPedidos.add(dp);
                 }
@@ -480,19 +495,6 @@ public class Controlador implements ActionListener, ChangeListener {
         }
     }
 
-    private void listarComboProd() {
-        int i = 0;
-        int numProd = prodDao.listar().size();
-        String[] productos = new String[numProd];
-
-        for (Producto p : prodDao.listar()) {
-            productos[i] = p.getNombreProducto();
-            i++;
-        }
-        DefaultComboBoxModel<String> comboModelo = new DefaultComboBoxModel<>(productos);
-        frmInicioC.cboProductos.setModel(comboModelo);
-    }
-
     private void mostrarProPedidoTabla() {
 
         double subtotal = 0;
@@ -509,7 +511,7 @@ public class Controlador implements ActionListener, ChangeListener {
             modelo.addRow(registros);
         }
 
-        double igv = subtotal * 0.18;
+        double igv = Math.round(subtotal * 0.18 * 100.0) / 100.0;
         double total = subtotal + igv;
         ped.setSubtotal(subtotal);
         ped.setIgv(igv);
