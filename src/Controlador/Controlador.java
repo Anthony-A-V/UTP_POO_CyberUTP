@@ -16,6 +16,7 @@ import Modelo.DAOProductoImpl;
 import Modelo.DAOUsuarioClienteImpl;
 import Modelo.DAOUsuarioEmpleadoImpl;
 import Modelo.DetallePedido;
+import Modelo.IPedidoExistente;
 import Modelo.Pedido;
 import Modelo.Producto;
 import Modelo.UsuarioCliente;
@@ -108,7 +109,18 @@ public class Controlador implements ActionListener, ChangeListener {
                 usuCliDao.buscar(usuCli);
                 frmInicioC.spnCantidad.setValue(1);
                 listarComboProd();
-                calcularPrecio();
+                
+                // Función Lambda 2
+                prodDao.listar().forEach((p) -> {
+                    if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
+
+                        detPed.setProducto(p);
+                        detPed.setCantidad(Integer.parseInt(frmInicioC.spnCantidad.getValue().toString()));
+                        frmInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
+                        detPed.setImporte(p.getPrecio() * (double) detPed.getCantidad());
+                        frmInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
+                    }
+                });
                 frmInicioC.setVisible(true);
                 frmInicioC.lblCliente.setText("Usuario - " + usuCli.getNombres());
 
@@ -371,7 +383,16 @@ public class Controlador implements ActionListener, ChangeListener {
 
         if (e.getSource() == frmInicioC.cboProductos) {
 
-            calcularPrecio();
+            prodDao.listar().forEach((p) -> {
+                if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
+
+                    detPed.setProducto(p);
+                    detPed.setCantidad(Integer.parseInt(frmInicioC.spnCantidad.getValue().toString()));
+                    frmInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
+                    detPed.setImporte(p.getPrecio() * (double) detPed.getCantidad());
+                    frmInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
+                }
+            });
         }
 
         if (e.getSource() == frmInicioC.btnAgregar) {
@@ -383,13 +404,26 @@ public class Controlador implements ActionListener, ChangeListener {
 
             if (dp.getCantidad() != 0) {
 
-                if (!pedidoExistente(dp)) {
+                // Función Lambda 1
+                IPedidoExistente lambda1 = (detPed) -> {
+                    for (DetallePedido p : listPedidos) {
+
+                        if (p.getProducto().getNombreProducto().equals(detPed.getProducto().getNombreProducto())) {
+
+                            p.setCantidad(detPed.getCantidad());
+                            p.setImporte(detPed.getImporte());
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+                if (!lambda1.pedidoExistente(dp)) {
 
                     listPedidos.add(dp);
                 }
+                frmInicioC.spnCantidad.setValue(1);
+                mostrarProPedidoTabla();
             }
-            frmInicioC.spnCantidad.setValue(1);
-            mostrarProPedidoTabla();
         }
 
         if (e.getSource() == frmInicioC.btnQuitar) {
@@ -433,35 +467,16 @@ public class Controlador implements ActionListener, ChangeListener {
 
         if (e.getSource() == frmInicioC.spnCantidad) {
 
-            calcularPrecio();
-        }
-    }
+            prodDao.listar().forEach((p) -> {
+                if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
 
-    private boolean pedidoExistente(DetallePedido pedido) {
-
-        for (DetallePedido p : listPedidos) {
-
-            if (p.getProducto().getNombreProducto().equals(pedido.getProducto().getNombreProducto())) {
-
-                p.setCantidad(pedido.getCantidad());
-                p.setImporte(pedido.getImporte());
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void calcularPrecio() {
-        for (Producto p : prodDao.listar()) {
-
-            if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
-
-                detPed.setProducto(p);
-                detPed.setCantidad(Integer.parseInt(frmInicioC.spnCantidad.getValue().toString()));
-                frmInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
-                detPed.setImporte(p.getPrecio() * (double) detPed.getCantidad());
-                frmInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
-            }
+                    detPed.setProducto(p);
+                    detPed.setCantidad(Integer.parseInt(frmInicioC.spnCantidad.getValue().toString()));
+                    frmInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
+                    detPed.setImporte(p.getPrecio() * (double) detPed.getCantidad());
+                    frmInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
+                }
+            });
         }
     }
 
