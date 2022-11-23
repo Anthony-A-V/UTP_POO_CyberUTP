@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CyberUTP">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/CyberUTP.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

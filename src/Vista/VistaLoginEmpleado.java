@@ -8,14 +8,14 @@ package Vista;
  *
  * @author ANTHONY
  */
-public class frmLoginEmpleado extends javax.swing.JFrame {
+public class VistaLoginEmpleado extends javax.swing.JFrame {
 
     public static String empleado;
 
     /**
      * Creates new form frmLoginCliente
      */
-    public frmLoginEmpleado() {
+    public VistaLoginEmpleado() {
         initComponents();
         this.setTitle("Login Empleado");
     }
@@ -42,14 +42,13 @@ public class frmLoginEmpleado extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1042, 730));
         setMinimumSize(new java.awt.Dimension(1042, 730));
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         jLabel1.setText("Login Empleado");
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        jLabel2.setText("Código Empleado:");
+        jLabel2.setText("Usuario:");
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel3.setText("Clave:");
@@ -84,31 +83,29 @@ public class frmLoginEmpleado extends javax.swing.JFrame {
                                 .addGap(382, 382, 382)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(292, 292, 292)
+                                .addGap(268, 268, 268)
+                                .addComponent(lblMensajeInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(300, 300, 300)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
-                                .addGap(66, 66, 66)
+                                .addGap(150, 150, 150)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCodEmpleado)
-                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(415, 415, 415)
+                                .addComponent(btnIniciarSesion)))
+                        .addGap(0, 261, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnIniciarSesion)
-                .addGap(406, 406, 406))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(268, 268, 268)
-                .addComponent(lblMensajeInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(267, 267, 267))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(166, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
+                .addGap(104, 104, 104)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(txtCodEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,9 +113,9 @@ public class frmLoginEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
+                .addGap(67, 67, 67)
                 .addComponent(btnIniciarSesion)
-                .addGap(68, 68, 68)
+                .addGap(66, 66, 66)
                 .addComponent(lblMensajeInicio)
                 .addGap(95, 95, 95)
                 .addComponent(btnRegresar)
@@ -150,18 +147,30 @@ public class frmLoginEmpleado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
+            java.util.logging.Logger.getLogger(VistaLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
                     null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
+            java.util.logging.Logger.getLogger(VistaLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
                     null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
+            java.util.logging.Logger.getLogger(VistaLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
                     null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
+            java.util.logging.Logger.getLogger(VistaLoginEmpleado.class.getName()).log(java.util.logging.Level.SEVERE,
                     null, ex);
         }
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
         // </editor-fold>
         // </editor-fold>
         // </editor-fold>
@@ -170,7 +179,7 @@ public class frmLoginEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmLoginEmpleado().setVisible(true);
+                new VistaLoginEmpleado().setVisible(true);
             }
         });
     }

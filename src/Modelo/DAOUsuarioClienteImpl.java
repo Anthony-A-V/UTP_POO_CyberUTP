@@ -71,6 +71,32 @@ public class DAOUsuarioClienteImpl implements DAOUsuarioCliente {
 
     @Override
     public boolean actualizar(UsuarioCliente usuarioCliente) {
+        String consulta = "update cliente set Nombres = ?, Apellidos = ?, Clave = ?, Dni = ?, Telefono = ?, Direccion = ?"
+                + " where IdCliente = ?;";
+
+        try {
+            String[] si_no = { "Sí", "No" };
+            int valor = JOptionPane.showOptionDialog(null, "¿Está seguro de actualizar sus datos?",
+                    "Actualizar Datos", 0, JOptionPane.QUESTION_MESSAGE, null, si_no, null);
+            if (valor == 0) {
+                PreparedStatement pst = con.prepareStatement(consulta);
+                pst.setString(1, usuarioCliente.getNombres());
+                pst.setString(2, usuarioCliente.getApellidos());
+                pst.setString(3, usuarioCliente.getClave());
+                pst.setInt(4, usuarioCliente.getDni());
+                pst.setInt(5, usuarioCliente.getTelefono());
+                pst.setString(6, usuarioCliente.getDireccion());
+                pst.setInt(7, usuarioCliente.getIdCliente());
+                pst.execute();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            cc.desconectar();
+        }
         return false;
     }
 

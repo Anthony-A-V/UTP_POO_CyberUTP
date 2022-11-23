@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/lombok.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.47-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mssql-jdbc-10.2.0.jre17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mssql-jdbc-10.2.0.jre11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mssql-jdbc-10.2.0.jre8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

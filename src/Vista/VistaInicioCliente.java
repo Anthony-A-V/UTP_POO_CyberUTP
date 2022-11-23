@@ -8,12 +8,12 @@ package Vista;
  *
  * @author ANTHONY
  */
-public class frmInicioCliente extends javax.swing.JFrame {
+public class VistaInicioCliente extends javax.swing.JFrame {
 
         /**
          * Creates new form frmLoginCliente
          */
-        public frmInicioCliente() {
+        public VistaInicioCliente() {
                 initComponents();
                 this.setTitle("Inicio Cliente");
         }
@@ -67,14 +67,14 @@ public class frmInicioCliente extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDireccion = new javax.swing.JTextArea();
         txtTelefono = new javax.swing.JTextField();
-        txtDni = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
         txtConfirmarClave = new javax.swing.JPasswordField();
         txtClave = new javax.swing.JPasswordField();
-        btnRegistrarse = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        txtNombres = new javax.swing.JPasswordField();
-        txtClave2 = new javax.swing.JPasswordField();
+        txtApellidos = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -271,14 +271,14 @@ public class frmInicioCliente extends javax.swing.JFrame {
 
         txtTelefono.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
 
-        txtDni.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        txtNombres.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
 
         txtConfirmarClave.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
 
         txtClave.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
 
-        btnRegistrarse.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        btnRegistrarse.setText("Actualizar datos");
+        btnActualizar.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        btnActualizar.setText("Actualizar datos");
 
         jLabel18.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel18.setText("Nombres:");
@@ -286,9 +286,9 @@ public class frmInicioCliente extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel19.setText("Apellidos:");
 
-        txtNombres.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        txtApellidos.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
 
-        txtClave2.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        txtDni.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -299,8 +299,8 @@ public class frmInicioCliente extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(228, 228, 228)
-                        .addComponent(btnRegistrarse)
-                        .addGap(293, 293, 293))
+                        .addComponent(btnActualizar)
+                        .addGap(463, 463, 463))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,24 +325,24 @@ public class frmInicioCliente extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtConfirmarClave)
                             .addComponent(txtTelefono)
-                            .addComponent(txtDni)
+                            .addComponent(txtNombres)
                             .addComponent(txtClave)
                             .addComponent(jScrollPane2)
-                            .addComponent(txtNombres)
-                            .addComponent(txtClave2))))
-                .addGap(170, 170, 170))
+                            .addComponent(txtApellidos)
+                            .addComponent(txtDni))
+                        .addGap(170, 170, 170))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
+                    .addComponent(jLabel18)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtClave2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
+                    .addComponent(jLabel19)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
@@ -353,8 +353,8 @@ public class frmInicioCliente extends javax.swing.JFrame {
                     .addComponent(txtConfirmarClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,7 +364,7 @@ public class frmInicioCliente extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addComponent(btnRegistrarse)
+                .addComponent(btnActualizar)
                 .addGap(58, 58, 58))
         );
 
@@ -428,22 +428,118 @@ public class frmInicioCliente extends javax.swing.JFrame {
                                 }
                         }
                 } catch (ClassNotFoundException ex) {
-                        java.util.logging.Logger.getLogger(frmInicioCliente.class.getName()).log(
+                        java.util.logging.Logger.getLogger(VistaInicioCliente.class.getName()).log(
                                         java.util.logging.Level.SEVERE,
                                         null, ex);
                 } catch (InstantiationException ex) {
-                        java.util.logging.Logger.getLogger(frmInicioCliente.class.getName()).log(
+                        java.util.logging.Logger.getLogger(VistaInicioCliente.class.getName()).log(
                                         java.util.logging.Level.SEVERE,
                                         null, ex);
                 } catch (IllegalAccessException ex) {
-                        java.util.logging.Logger.getLogger(frmInicioCliente.class.getName()).log(
+                        java.util.logging.Logger.getLogger(VistaInicioCliente.class.getName()).log(
                                         java.util.logging.Level.SEVERE,
                                         null, ex);
                 } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                        java.util.logging.Logger.getLogger(frmInicioCliente.class.getName()).log(
+                        java.util.logging.Logger.getLogger(VistaInicioCliente.class.getName()).log(
                                         java.util.logging.Level.SEVERE,
                                         null, ex);
                 }
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
+                // </editor-fold>
                 // </editor-fold>
                 // </editor-fold>
                 // </editor-fold>
@@ -480,17 +576,17 @@ public class frmInicioCliente extends javax.swing.JFrame {
                 /* Create and display the form */
                 java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
-                                new frmInicioCliente().setVisible(true);
+                                new VistaInicioCliente().setVisible(true);
                         }
                 });
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnActualizar;
     public javax.swing.JButton btnAgregar;
     public javax.swing.JButton btnCerrar;
     public javax.swing.JButton btnComprar;
     public javax.swing.JButton btnQuitar;
-    public javax.swing.JButton btnRegistrarse;
     public javax.swing.JComboBox<String> cboProductos;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -520,12 +616,12 @@ public class frmInicioCliente extends javax.swing.JFrame {
     public javax.swing.JSpinner spnCantidad;
     private javax.swing.JTabbedPane tabTienda;
     public javax.swing.JTable tblProdTienda;
+    public javax.swing.JTextField txtApellidos;
     public javax.swing.JPasswordField txtClave;
-    public javax.swing.JPasswordField txtClave2;
     public javax.swing.JPasswordField txtConfirmarClave;
     public javax.swing.JTextArea txtDireccion;
     public javax.swing.JTextField txtDni;
-    public javax.swing.JPasswordField txtNombres;
+    public javax.swing.JTextField txtNombres;
     public javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

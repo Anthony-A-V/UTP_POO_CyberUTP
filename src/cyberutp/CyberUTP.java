@@ -11,24 +11,24 @@ import Modelo.Pedido;
 import Modelo.Producto;
 import Modelo.UsuarioCliente;
 import Modelo.UsuarioEmpleado;
-import Vista.frmInicioCliente;
-import Vista.frmInicioEmpleado;
-import Vista.frmLoginCliente;
-import Vista.frmLoginEmpleado;
-import Vista.frmRegistro;
+import Vista.VistaInicioCliente;
+import Vista.VistaInicioEmpleado;
+import Vista.VistaLoginCliente;
+import Vista.VistaLoginEmpleado;
+import Vista.VistaRegistro;
 
 public class CyberUTP {
 
     public static void main(String[] args) {
         UsuarioCliente modUsuCli = new UsuarioCliente();
         DAOUsuarioClienteImpl modUsuCliDao = new DAOUsuarioClienteImpl();
-        frmLoginCliente frmLoginC = new frmLoginCliente();
-        frmInicioCliente frmInicioC = new frmInicioCliente();
-        frmRegistro frmReg = new frmRegistro();
+        VistaLoginCliente vistaLoginC = new VistaLoginCliente();
+        VistaInicioCliente vistaInicioC = new VistaInicioCliente();
+        VistaRegistro vistaReg = new VistaRegistro();
         UsuarioEmpleado modUsuEmp = new UsuarioEmpleado();
         DAOUsuarioEmpleadoImpl modUsuEmpDao = new DAOUsuarioEmpleadoImpl();
-        frmLoginEmpleado frmLoginE = new frmLoginEmpleado();
-        frmInicioEmpleado frmInicioE = new frmInicioEmpleado();
+        VistaLoginEmpleado vistaLoginE = new VistaLoginEmpleado();
+        VistaInicioEmpleado vistaInicioE = new VistaInicioEmpleado();
         Producto modProd = new Producto();
         DAOProductoImpl modProdDao = new DAOProductoImpl();
         Pedido modPed = new Pedido();
@@ -36,10 +36,10 @@ public class CyberUTP {
         DetallePedido modDetPed = new DetallePedido();
         DAODetallePedidoImpl modDetPedDao = new DAODetallePedidoImpl();
 
-        Controlador ctrl = new Controlador(modUsuCli, modUsuCliDao, frmLoginC, frmInicioC,
-                frmReg, modUsuEmp, modUsuEmpDao, frmLoginE, frmInicioE, modProd, modProdDao, modPed, modPedDao,
+        Controlador ctrl = new Controlador(modUsuCli, modUsuCliDao, vistaLoginC, vistaInicioC,
+                vistaReg, modUsuEmp, modUsuEmpDao, vistaLoginE, vistaInicioE, modProd, modProdDao, modPed, modPedDao,
                 modDetPed, modDetPedDao);
         ctrl.iniciar();
-        frmLoginC.setVisible(true);
+        vistaLoginC.setVisible(true);
     }
 }

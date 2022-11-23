@@ -66,15 +66,21 @@ public class DAOUsuarioEmpleadoImpl {
                 + " where IdEmpleado = ?;";
 
         try {
-            PreparedStatement pst = con.prepareStatement(consulta);
-            pst.setString(1, usuarioEmpleado.getUsuario());
-            pst.setString(2, usuarioEmpleado.getClave());
-            pst.setString(3, usuarioEmpleado.getNombres());
-            pst.setString(4, usuarioEmpleado.getApellidos());
-            pst.setInt(5, usuarioEmpleado.getIdEmpleado());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Empleado actualizado");
-            return true;
+            String[] si_no = { "Sí", "No" };
+            int valor = JOptionPane.showOptionDialog(null, "¿Está seguro de actualizar el empleado?",
+                    "Actualizar Empleado", 0, JOptionPane.QUESTION_MESSAGE, null, si_no, null);
+            if (valor == 0) {
+                PreparedStatement pst = con.prepareStatement(consulta);
+                pst.setString(1, usuarioEmpleado.getUsuario());
+                pst.setString(2, usuarioEmpleado.getClave());
+                pst.setString(3, usuarioEmpleado.getNombres());
+                pst.setString(4, usuarioEmpleado.getApellidos());
+                pst.setInt(5, usuarioEmpleado.getIdEmpleado());
+                pst.execute();
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {
@@ -88,11 +94,17 @@ public class DAOUsuarioEmpleadoImpl {
         String consulta = "delete from empleado where IdEmpleado = ?";
 
         try {
-            PreparedStatement pst = con.prepareStatement(consulta);
-            pst.setString(1, String.valueOf(usuarioEmpleado.getIdEmpleado()));
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Empleado eliminado");
-            return true;
+            String[] si_no = { "Sí", "No" };
+            int valor = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar el empleado?",
+                    "Eliminar Empleado", 0, JOptionPane.QUESTION_MESSAGE, null, si_no, null);
+            if (valor == 0) {
+                PreparedStatement pst = con.prepareStatement(consulta);
+                pst.setString(1, String.valueOf(usuarioEmpleado.getIdEmpleado()));
+                pst.execute();
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {

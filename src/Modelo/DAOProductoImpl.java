@@ -45,15 +45,21 @@ public class DAOProductoImpl implements DAOProducto {
                 + " where IdProducto = ?;";
 
         try {
-            PreparedStatement pst = con.prepareStatement(consulta);
-            pst.setString(1, producto.getNombreProducto());
-            pst.setString(2, producto.getCategoria());
-            pst.setInt(3, producto.getStock());
-            pst.setDouble(4, producto.getPrecio());
-            pst.setInt(5, producto.getIdProducto());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Producto actualizado");
-            return true;
+            String[] si_no = { "Sí", "No" };
+            int valor = JOptionPane.showOptionDialog(null, "¿Está seguro de actualizar el producto?",
+                    "Actualizar Producto", 0, JOptionPane.QUESTION_MESSAGE, null, si_no, null);
+            if (valor == 0) {
+                PreparedStatement pst = con.prepareStatement(consulta);
+                pst.setString(1, producto.getNombreProducto());
+                pst.setString(2, producto.getCategoria());
+                pst.setInt(3, producto.getStock());
+                pst.setDouble(4, producto.getPrecio());
+                pst.setInt(5, producto.getIdProducto());
+                pst.execute();
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {
@@ -68,11 +74,17 @@ public class DAOProductoImpl implements DAOProducto {
         String consulta = "delete from producto where IdProducto = ?;";
 
         try {
-            PreparedStatement pst = con.prepareStatement(consulta);
-            pst.setInt(1, producto.getIdProducto());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Producto eliminado");
-            return true;
+            String[] si_no = { "Sí", "No" };
+            int valor = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar el producto?",
+                    "Eliminar Producto", 0, JOptionPane.QUESTION_MESSAGE, null, si_no, null);
+            if (valor == 0) {
+                PreparedStatement pst = con.prepareStatement(consulta);
+                pst.setInt(1, producto.getIdProducto());
+                pst.execute();
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {

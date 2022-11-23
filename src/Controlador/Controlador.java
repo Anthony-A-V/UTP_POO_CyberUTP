@@ -22,23 +22,23 @@ import Modelo.Pedido;
 import Modelo.Producto;
 import Modelo.UsuarioCliente;
 import Modelo.UsuarioEmpleado;
-import Vista.frmInicioCliente;
-import Vista.frmInicioEmpleado;
-import Vista.frmLoginCliente;
-import Vista.frmLoginEmpleado;
-import Vista.frmRegistro;
+import Vista.VistaInicioCliente;
+import Vista.VistaInicioEmpleado;
+import Vista.VistaLoginCliente;
+import Vista.VistaLoginEmpleado;
+import Vista.VistaRegistro;
 
 public class Controlador implements ActionListener, ChangeListener {
 
     private UsuarioCliente usuCli;
     private DAOUsuarioClienteImpl usuCliDao;
-    private frmLoginCliente frmLoginC;
-    private frmInicioCliente frmInicioC;
-    private frmRegistro frmReg;
+    private VistaLoginCliente vistaLoginC;
+    private VistaInicioCliente vistaInicioC;
+    private VistaRegistro vistaReg;
     private UsuarioEmpleado usuEmp;
     private DAOUsuarioEmpleadoImpl usuEmpDao;
-    private frmLoginEmpleado frmLoginE;
-    private frmInicioEmpleado frmInicioE;
+    private VistaLoginEmpleado vistaLoginE;
+    private VistaInicioEmpleado vistaInicioE;
     private Producto prod;
     private DAOProductoImpl prodDao;
     private Pedido ped;
@@ -47,68 +47,69 @@ public class Controlador implements ActionListener, ChangeListener {
     private DAODetallePedidoImpl detPedDao;
     private ArrayList<DetallePedido> listPedidos = new ArrayList<>();
 
-    public Controlador(UsuarioCliente usuCli, DAOUsuarioClienteImpl usuCliDao, frmLoginCliente frmLoginC,
-            frmInicioCliente frmInicioC, frmRegistro frmReg, UsuarioEmpleado usuEmp, DAOUsuarioEmpleadoImpl usuEmpDao,
-            frmLoginEmpleado frmLoginE, frmInicioEmpleado frmInicioE, Producto prod, DAOProductoImpl prodDao,
-            Pedido ped, DAOPedidoImpl pedDao,
-            DetallePedido detPed, DAODetallePedidoImpl detPedDao) {
+    public Controlador(UsuarioCliente usuCli, DAOUsuarioClienteImpl usuCliDao, VistaLoginCliente vistaLoginC,
+            VistaInicioCliente vistaInicioC, VistaRegistro vistaReg, UsuarioEmpleado usuEmp,
+            DAOUsuarioEmpleadoImpl usuEmpDao, VistaLoginEmpleado vistaLoginE, VistaInicioEmpleado vistaInicioE,
+            Producto prod, DAOProductoImpl prodDao, Pedido ped, DAOPedidoImpl pedDao, DetallePedido detPed,
+            DAODetallePedidoImpl detPedDao) {
         this.usuCli = usuCli;
         this.usuCliDao = usuCliDao;
-        this.frmLoginC = frmLoginC;
-        this.frmInicioC = frmInicioC;
-        this.frmReg = frmReg;
+        this.vistaLoginC = vistaLoginC;
+        this.vistaInicioC = vistaInicioC;
+        this.vistaReg = vistaReg;
         this.usuEmp = usuEmp;
         this.usuEmpDao = usuEmpDao;
-        this.frmLoginE = frmLoginE;
-        this.frmInicioE = frmInicioE;
+        this.vistaLoginE = vistaLoginE;
+        this.vistaInicioE = vistaInicioE;
         this.prod = prod;
         this.prodDao = prodDao;
         this.ped = ped;
         this.pedDao = pedDao;
         this.detPed = detPed;
         this.detPedDao = detPedDao;
-        this.frmLoginC.btnIniciarSesion.addActionListener(this);
-        this.frmLoginC.btnLoginEmpleado.addActionListener(this);
-        this.frmLoginC.btnRegistrarse.addActionListener(this);
-        this.frmInicioC.btnCerrar.addActionListener(this);
-        this.frmReg.btnRegistrarse.addActionListener(this);
-        this.frmReg.btnRegresar.addActionListener(this);
-        this.frmLoginE.btnIniciarSesion.addActionListener(this);
-        this.frmLoginE.btnRegresar.addActionListener(this);
-        this.frmInicioE.btnCerrarSesion.addActionListener(this);
-        this.frmInicioE.btnAgregarEmpleado.addActionListener(this);
-        this.frmInicioE.btnEliminarEmpleado.addActionListener(this);
-        this.frmInicioE.btnActualizarEmpleado.addActionListener(this);
-        this.frmInicioE.btnBuscarEmpleado.addActionListener(this);
-        this.frmInicioE.btnAgregarProducto.addActionListener(this);
-        this.frmInicioE.btnActualizarProducto.addActionListener(this);
-        this.frmInicioE.btnEliminarProducto.addActionListener(this);
-        this.frmInicioE.btnBuscarProducto.addActionListener(this);
-        this.frmInicioC.cboProductos.addActionListener(this);
-        this.frmInicioC.spnCantidad.addChangeListener(this);
-        this.frmInicioC.btnAgregar.addActionListener(this);
-        this.frmInicioC.btnQuitar.addActionListener(this);
-        this.frmInicioC.btnComprar.addActionListener(this);
+        this.vistaLoginC.btnIniciarSesion.addActionListener(this);
+        this.vistaLoginC.btnLoginEmpleado.addActionListener(this);
+        this.vistaLoginC.btnRegistrarse.addActionListener(this);
+        this.vistaInicioC.btnCerrar.addActionListener(this);
+        this.vistaReg.btnRegistrarse.addActionListener(this);
+        this.vistaReg.btnRegresar.addActionListener(this);
+        this.vistaLoginE.btnIniciarSesion.addActionListener(this);
+        this.vistaLoginE.btnRegresar.addActionListener(this);
+        this.vistaInicioE.btnCerrarSesion.addActionListener(this);
+        this.vistaInicioE.btnAgregarEmpleado.addActionListener(this);
+        this.vistaInicioE.btnEliminarEmpleado.addActionListener(this);
+        this.vistaInicioE.btnActualizarEmpleado.addActionListener(this);
+        this.vistaInicioE.btnBuscarEmpleado.addActionListener(this);
+        this.vistaInicioE.btnAgregarProducto.addActionListener(this);
+        this.vistaInicioE.btnActualizarProducto.addActionListener(this);
+        this.vistaInicioE.btnEliminarProducto.addActionListener(this);
+        this.vistaInicioE.btnBuscarProducto.addActionListener(this);
+        this.vistaInicioC.cboProductos.addActionListener(this);
+        this.vistaInicioC.spnCantidad.addChangeListener(this);
+        this.vistaInicioC.btnAgregar.addActionListener(this);
+        this.vistaInicioC.btnQuitar.addActionListener(this);
+        this.vistaInicioC.btnComprar.addActionListener(this);
+        this.vistaInicioC.btnActualizar.addActionListener(this);
     }
 
     public void iniciar() {
-        frmLoginC.setTitle("Login Cliente");
-        frmLoginC.setLocationRelativeTo(null);
+        vistaLoginC.setTitle("Login Cliente");
+        vistaLoginC.setLocationRelativeTo(null);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == frmLoginC.btnIniciarSesion) {
+        if (e.getSource() == vistaLoginC.btnIniciarSesion) {
 
-            usuCli.setUsuario(frmLoginC.txtUsuario.getText());
-            usuCli.setClave(String.valueOf(frmLoginC.txtClave.getPassword()));
+            usuCli.setUsuario(vistaLoginC.txtUsuario.getText());
+            usuCli.setClave(String.valueOf(vistaLoginC.txtClave.getPassword()));
 
             if (usuCliDao.iniciarSesion(usuCli)) {
 
-                frmLoginC.setVisible(false);
+                vistaLoginC.setVisible(false);
                 usuCliDao.buscar(usuCli);
-                frmInicioC.spnCantidad.setValue(1);
+                vistaInicioC.spnCantidad.setValue(1);
 
                 // Función Lambda 1
                 ICargarCombo lambda1 = () -> {
@@ -121,73 +122,73 @@ public class Controlador implements ActionListener, ChangeListener {
                         i++;
                     }
                     DefaultComboBoxModel<String> comboModelo = new DefaultComboBoxModel<>(productos);
-                    frmInicioC.cboProductos.setModel(comboModelo);
+                    vistaInicioC.cboProductos.setModel(comboModelo);
                 };
                 lambda1.cargarCombo();
 
                 // Función Lambda 2
                 prodDao.listar().forEach((p) -> {
-                    if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
+                    if (p.getNombreProducto().equals(vistaInicioC.cboProductos.getSelectedItem())) {
 
                         detPed.setProducto(p);
-                        detPed.setCantidad(Integer.parseInt(frmInicioC.spnCantidad.getValue().toString()));
-                        frmInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
+                        detPed.setCantidad(Integer.parseInt(vistaInicioC.spnCantidad.getValue().toString()));
+                        vistaInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
                         detPed.setImporte(p.getPrecio() * (double) detPed.getCantidad());
-                        frmInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
+                        vistaInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
                     }
                 });
-                frmInicioC.setVisible(true);
-                frmInicioC.lblCliente.setText("Usuario - " + usuCli.getNombres());
+                vistaInicioC.setVisible(true);
+                vistaInicioC.lblCliente.setText("Usuario - " + usuCli.getNombres());
 
             } else {
 
-                frmLoginC.lblMensajeInicio.setText("Usuario y/o Clave incorrectos");
+                vistaLoginC.lblMensajeInicio.setText("Usuario y/o Clave incorrectos");
             }
         }
 
-        if (e.getSource() == frmLoginC.btnRegistrarse) {
+        if (e.getSource() == vistaLoginC.btnRegistrarse) {
 
-            frmLoginC.setVisible(false);
+            vistaLoginC.setVisible(false);
             limpiarRegistroCliente();
-            frmReg.setVisible(true);
+            vistaReg.setVisible(true);
         }
 
-        if (e.getSource() == frmLoginC.btnLoginEmpleado) {
+        if (e.getSource() == vistaLoginC.btnLoginEmpleado) {
 
-            frmLoginC.setVisible(false);
+            vistaLoginC.setVisible(false);
             limpiarLoginEmpleado();
-            frmLoginE.setVisible(true);
+            vistaLoginE.setVisible(true);
         }
 
-        if (e.getSource() == frmInicioC.btnCerrar) {
+        if (e.getSource() == vistaInicioC.btnCerrar) {
 
-            frmInicioC.setVisible(false);
+            vistaInicioC.setVisible(false);
             limpiarLoginCliente();
-            frmLoginC.setVisible(true);
+            vistaLoginC.setVisible(true);
         }
 
-        if (e.getSource() == frmReg.btnRegistrarse) {
+        if (e.getSource() == vistaReg.btnRegistrarse) {
 
             if (validarCamposRegistro()) {
 
-                usuCli.setUsuario(frmReg.txtUsuario.getText());
-                usuCli.setNombres(String.valueOf(frmReg.txtNombres.getText()));
-                usuCli.setApellidos(String.valueOf(frmReg.txtApellidos.getText()));
-                usuCli.setClave(String.valueOf(frmReg.txtClave.getPassword()));
-                usuCli.setDireccion(frmReg.txtDireccion.getText());
-                usuCli.setDni(Integer.parseInt(frmReg.txtDni.getText()));
-                usuCli.setTelefono(Integer.parseInt(frmReg.txtTelefono.getText()));
+                usuCli.setUsuario(vistaReg.txtUsuario.getText());
+                usuCli.setNombres(String.valueOf(vistaReg.txtNombres.getText()));
+                usuCli.setApellidos(String.valueOf(vistaReg.txtApellidos.getText()));
+                usuCli.setClave(String.valueOf(vistaReg.txtClave.getPassword()));
+                usuCli.setDireccion(vistaReg.txtDireccion.getText());
+                usuCli.setDni(Integer.parseInt(vistaReg.txtDni.getText()));
+                usuCli.setTelefono(Integer.parseInt(vistaReg.txtTelefono.getText()));
 
-                if (String.valueOf(frmReg.txtClave.getPassword())
-                        .equals(String.valueOf(frmReg.txtConfirmarClave.getPassword()))) {
+                if (String.valueOf(vistaReg.txtClave.getPassword())
+                        .equals(String.valueOf(vistaReg.txtConfirmarClave.getPassword()))) {
 
                     if (usuCliDao.crear(usuCli)) {
 
                         JOptionPane.showMessageDialog(null, "Registrado correctamente", "Registrado",
                                 JOptionPane.INFORMATION_MESSAGE);
-                        frmReg.setVisible(false);
+                        vistaReg.setVisible(false);
                         limpiarLoginCliente();
-                        frmLoginC.setVisible(true);
+                        vistaLoginC.setVisible(true);
 
                     }
 
@@ -200,55 +201,66 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmReg.btnRegresar) {
+        if (e.getSource() == vistaReg.btnRegresar) {
 
-            frmReg.setVisible(false);
+            vistaReg.setVisible(false);
             limpiarLoginCliente();
-            frmLoginC.setVisible(true);
+            vistaLoginC.setVisible(true);
         }
 
-        if (e.getSource() == frmLoginE.btnIniciarSesion) {
+        if (e.getSource() == vistaLoginE.btnIniciarSesion) {
 
-            usuEmp.setUsuario(frmLoginE.txtCodEmpleado.getText());
-            usuEmp.setClave(String.valueOf(frmLoginE.txtClave.getPassword()));
+            usuEmp.setUsuario(vistaLoginE.txtCodEmpleado.getText());
+            usuEmp.setClave(String.valueOf(vistaLoginE.txtClave.getPassword()));
 
             if (usuEmpDao.iniciarSesion(usuEmp)) {
 
-                frmLoginE.setVisible(false);
+                vistaLoginE.setVisible(false);
                 usuEmpDao.buscar(usuEmp);
-                frmInicioE.lblEmpleado.setText("Empleado - " + usuEmp.getNombres());
+                vistaInicioE.lblEmpleado.setText("Empleado - " + usuEmp.getNombres());
                 mostrarEmpTabla();
                 mostrarProTabla();
-                frmInicioE.setVisible(true);
+
+                ICargarCombo lambda = () -> {
+
+                    String[] categoria = new String[2];
+                    categoria[0] = "Informática";
+                    categoria[1] = "Electrónica";
+                    DefaultComboBoxModel<String> comboModelo = new DefaultComboBoxModel<>(categoria);
+                    vistaInicioE.cboCategoria.setModel(comboModelo);
+                };
+                lambda.cargarCombo();
+                prod.setCategoria(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                vistaInicioE.setVisible(true);
 
             } else {
 
-                frmLoginE.lblMensajeInicio.setText("Código Empleado y/o Clave incorrectos");
+                vistaLoginE.lblMensajeInicio.setText("Código Empleado y/o Clave incorrectos");
             }
         }
 
-        if (e.getSource() == frmLoginE.btnRegresar) {
+        if (e.getSource() == vistaLoginE.btnRegresar) {
 
-            frmLoginE.setVisible(false);
+            vistaLoginE.setVisible(false);
             limpiarLoginCliente();
-            frmLoginC.setVisible(true);
+            vistaLoginC.setVisible(true);
         }
 
-        if (e.getSource() == frmInicioE.btnCerrarSesion) {
+        if (e.getSource() == vistaInicioE.btnCerrarSesion) {
 
-            frmInicioE.setVisible(false);
+            vistaInicioE.setVisible(false);
             limpiarLoginEmpleado();
-            frmLoginE.setVisible(true);
+            vistaLoginE.setVisible(true);
         }
 
-        if (e.getSource() == frmInicioE.btnAgregarEmpleado) {
+        if (e.getSource() == vistaInicioE.btnAgregarEmpleado) {
 
             if (validarCamposEmpleado()) {
 
-                usuEmp.setUsuario(frmInicioE.txtUsuario.getText());
-                usuEmp.setClave(frmInicioE.txtClave.getText());
-                usuEmp.setNombres(frmInicioE.txtNombres.getText());
-                usuEmp.setApellidos(frmInicioE.txtApellidos.getText());
+                usuEmp.setUsuario(vistaInicioE.txtUsuario.getText());
+                usuEmp.setClave(vistaInicioE.txtClave.getText());
+                usuEmp.setNombres(vistaInicioE.txtNombres.getText());
+                usuEmp.setApellidos(vistaInicioE.txtApellidos.getText());
 
                 if (usuEmpDao.crear(usuEmp)) {
 
@@ -258,12 +270,12 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmInicioE.btnEliminarEmpleado) {
+        if (e.getSource() == vistaInicioE.btnEliminarEmpleado) {
 
-            if (frmInicioE.tblEmpleados.getSelectedRow() != -1) {
+            if (vistaInicioE.tblEmpleados.getSelectedRow() != -1) {
 
-                int filaSeleccionada = frmInicioE.tblEmpleados.getSelectedRow();
-                String id = String.valueOf(frmInicioE.tblEmpleados.getValueAt(filaSeleccionada, 0));
+                int filaSeleccionada = vistaInicioE.tblEmpleados.getSelectedRow();
+                String id = String.valueOf(vistaInicioE.tblEmpleados.getValueAt(filaSeleccionada, 0));
                 usuEmp.setIdEmpleado(Integer.parseInt(id));
 
                 if (usuEmpDao.eliminar(usuEmp)) {
@@ -277,18 +289,18 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmInicioE.btnActualizarEmpleado) {
+        if (e.getSource() == vistaInicioE.btnActualizarEmpleado) {
 
             if (validarCamposEmpleado()) {
 
-                usuEmp.setUsuario(frmInicioE.txtUsuario.getText());
-                usuEmp.setClave(frmInicioE.txtClave.getText());
-                usuEmp.setNombres(frmInicioE.txtNombres.getText());
-                usuEmp.setApellidos(frmInicioE.txtApellidos.getText());
+                usuEmp.setUsuario(vistaInicioE.txtUsuario.getText());
+                usuEmp.setClave(vistaInicioE.txtClave.getText());
+                usuEmp.setNombres(vistaInicioE.txtNombres.getText());
+                usuEmp.setApellidos(vistaInicioE.txtApellidos.getText());
 
-                if (frmInicioE.tblEmpleados.getSelectedRow() != -1) {
-                    int filaSeleccionada = frmInicioE.tblEmpleados.getSelectedRow();
-                    String id = String.valueOf(frmInicioE.tblEmpleados.getValueAt(filaSeleccionada, 0));
+                if (vistaInicioE.tblEmpleados.getSelectedRow() != -1) {
+                    int filaSeleccionada = vistaInicioE.tblEmpleados.getSelectedRow();
+                    String id = String.valueOf(vistaInicioE.tblEmpleados.getValueAt(filaSeleccionada, 0));
                     usuEmp.setIdEmpleado(Integer.parseInt(id));
 
                     if (usuEmpDao.actualizar(usuEmp)) {
@@ -305,26 +317,26 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmInicioE.btnBuscarEmpleado) {
+        if (e.getSource() == vistaInicioE.btnBuscarEmpleado) {
 
-            if (frmInicioE.txtIdEmpleado.getText().equals("") || frmInicioE.txtIdEmpleado.getText() == null) {
+            if (vistaInicioE.txtIdEmpleado.getText().equals("") || vistaInicioE.txtIdEmpleado.getText() == null) {
                 mostrarEmpTabla();
 
             } else {
 
-                usuEmp.setIdEmpleado(Integer.parseInt(frmInicioE.txtIdEmpleado.getText()));
+                usuEmp.setIdEmpleado(Integer.parseInt(vistaInicioE.txtIdEmpleado.getText()));
                 buscarEmpTabla(usuEmp);
             }
         }
 
-        if (e.getSource() == frmInicioE.btnAgregarProducto) {
+        if (e.getSource() == vistaInicioE.btnAgregarProducto) {
 
             if (validarCamposProducto()) {
 
-                prod.setNombreProducto(frmInicioE.txtProducto.getText());
-                prod.setCategoria(frmInicioE.txtCategoria.getText());
-                prod.setStock(Integer.parseInt(frmInicioE.txtStock.getText()));
-                prod.setPrecio(Double.parseDouble(frmInicioE.txtPrecio.getText()));
+                prod.setNombreProducto(vistaInicioE.txtProducto.getText());
+                prod.setCategoria(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                prod.setStock(Integer.parseInt(vistaInicioE.txtStock.getText()));
+                prod.setPrecio(Double.parseDouble(vistaInicioE.txtPrecio.getText()));
                 prod.setUsuarioEmpleado(usuEmp);
 
                 if (prodDao.crear(prod)) {
@@ -335,12 +347,12 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmInicioE.btnEliminarProducto) {
+        if (e.getSource() == vistaInicioE.btnEliminarProducto) {
 
-            if (frmInicioE.tblProductos.getSelectedRow() != -1) {
+            if (vistaInicioE.tblProductos.getSelectedRow() != -1) {
 
-                int filaSeleccionada = frmInicioE.tblProductos.getSelectedRow();
-                String id = String.valueOf(frmInicioE.tblProductos.getValueAt(filaSeleccionada, 0));
+                int filaSeleccionada = vistaInicioE.tblProductos.getSelectedRow();
+                String id = String.valueOf(vistaInicioE.tblProductos.getValueAt(filaSeleccionada, 0));
                 prod.setIdProducto(Integer.parseInt(id));
 
                 if (prodDao.eliminar(prod)) {
@@ -355,19 +367,19 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmInicioE.btnActualizarProducto) {
+        if (e.getSource() == vistaInicioE.btnActualizarProducto) {
 
             if (validarCamposProducto()) {
 
-                prod.setNombreProducto(frmInicioE.txtProducto.getText());
-                prod.setCategoria(frmInicioE.txtCategoria.getText());
-                prod.setStock(Integer.parseInt(frmInicioE.txtStock.getText()));
-                prod.setPrecio(Double.parseDouble(frmInicioE.txtPrecio.getText()));
+                prod.setNombreProducto(vistaInicioE.txtProducto.getText());
+                prod.setCategoria(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                prod.setStock(Integer.parseInt(vistaInicioE.txtStock.getText()));
+                prod.setPrecio(Double.parseDouble(vistaInicioE.txtPrecio.getText()));
 
-                if (frmInicioE.tblProductos.getSelectedRow() != -1) {
+                if (vistaInicioE.tblProductos.getSelectedRow() != -1) {
 
-                    int filaSeleccionada = frmInicioE.tblProductos.getSelectedRow();
-                    String id = String.valueOf(frmInicioE.tblProductos.getValueAt(filaSeleccionada, 0));
+                    int filaSeleccionada = vistaInicioE.tblProductos.getSelectedRow();
+                    String id = String.valueOf(vistaInicioE.tblProductos.getValueAt(filaSeleccionada, 0));
                     prod.setIdProducto(Integer.parseInt(id));
 
                     if (prodDao.actualizar(prod)) {
@@ -385,33 +397,33 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmInicioE.btnBuscarProducto) {
+        if (e.getSource() == vistaInicioE.btnBuscarProducto) {
 
-            if (frmInicioE.txtIdProducto.getText().equals("") || frmInicioE.txtIdProducto.getText() == null) {
+            if (vistaInicioE.txtIdProducto.getText().equals("") || vistaInicioE.txtIdProducto.getText() == null) {
                 mostrarProTabla();
 
             } else {
 
-                prod.setIdProducto(Integer.parseInt(frmInicioE.txtIdProducto.getText()));
+                prod.setIdProducto(Integer.parseInt(vistaInicioE.txtIdProducto.getText()));
                 buscarProTabla(prod);
             }
         }
 
-        if (e.getSource() == frmInicioC.cboProductos) {
+        if (e.getSource() == vistaInicioC.cboProductos) {
 
             prodDao.listar().forEach((p) -> {
-                if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
+                if (p.getNombreProducto().equals(vistaInicioC.cboProductos.getSelectedItem())) {
 
                     detPed.setProducto(p);
-                    detPed.setCantidad(Integer.parseInt(frmInicioC.spnCantidad.getValue().toString()));
-                    frmInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
+                    detPed.setCantidad(Integer.parseInt(vistaInicioC.spnCantidad.getValue().toString()));
+                    vistaInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
                     detPed.setImporte(p.getPrecio() * (double) detPed.getCantidad());
-                    frmInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
+                    vistaInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
                 }
             });
         }
 
-        if (e.getSource() == frmInicioC.btnAgregar) {
+        if (e.getSource() == vistaInicioC.btnAgregar) {
 
             DetallePedido dp = new DetallePedido();
             dp.setProducto(detPed.getProducto());
@@ -437,17 +449,17 @@ public class Controlador implements ActionListener, ChangeListener {
 
                     listPedidos.add(dp);
                 }
-                frmInicioC.spnCantidad.setValue(1);
+                vistaInicioC.spnCantidad.setValue(1);
                 mostrarProPedidoTabla();
             }
         }
 
-        if (e.getSource() == frmInicioC.btnQuitar) {
+        if (e.getSource() == vistaInicioC.btnQuitar) {
 
-            if (frmInicioC.tblProdTienda.getSelectedRow() != -1) {
+            if (vistaInicioC.tblProdTienda.getSelectedRow() != -1) {
                 ArrayList<DetallePedido> listEliminar = new ArrayList<>();
-                int filaSeleccionada = frmInicioC.tblProdTienda.getSelectedRow();
-                String nombre = String.valueOf(frmInicioC.tblProdTienda.getValueAt(filaSeleccionada, 0));
+                int filaSeleccionada = vistaInicioC.tblProdTienda.getSelectedRow();
+                String nombre = String.valueOf(vistaInicioC.tblProdTienda.getValueAt(filaSeleccionada, 0));
 
                 for (DetallePedido p : listPedidos) {
 
@@ -465,7 +477,7 @@ public class Controlador implements ActionListener, ChangeListener {
             }
         }
 
-        if (e.getSource() == frmInicioC.btnComprar) {
+        if (e.getSource() == vistaInicioC.btnComprar) {
 
             ped.setUsuarioCliente(usuCli);
             pedDao.crear(ped);
@@ -476,21 +488,51 @@ public class Controlador implements ActionListener, ChangeListener {
             }
             JOptionPane.showMessageDialog(null, "Compra realizada");
         }
+
+        if (e.getSource() == vistaInicioC.btnActualizar) {
+            if (validarCamposActualizacion()) {
+
+                usuCli.setNombres(String.valueOf(vistaInicioC.txtNombres.getText()));
+                usuCli.setApellidos(String.valueOf(vistaInicioC.txtApellidos.getText()));
+                usuCli.setClave(String.valueOf(vistaInicioC.txtClave.getPassword()));
+                usuCli.setDireccion(vistaInicioC.txtDireccion.getText());
+                usuCli.setDni(Integer.parseInt(vistaInicioC.txtDni.getText()));
+                usuCli.setTelefono(Integer.parseInt(vistaInicioC.txtTelefono.getText()));
+
+                if (String.valueOf(vistaInicioC.txtClave.getPassword())
+                        .equals(String.valueOf(vistaInicioC.txtConfirmarClave.getPassword()))) {
+
+                    if (usuCliDao.actualizar(usuCli)) {
+
+                        JOptionPane.showMessageDialog(null, "Actualizado correctamente", "Actualizado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        vistaInicioC.lblCliente.setText("Usuario - " + usuCli.getNombres());
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Claves ingresadas diferentes",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
     }
 
     @Override
     public void stateChanged(ChangeEvent e) {
 
-        if (e.getSource() == frmInicioC.spnCantidad) {
+        if (e.getSource() == vistaInicioC.spnCantidad) {
 
             prodDao.listar().forEach((p) -> {
-                if (p.getNombreProducto().equals(frmInicioC.cboProductos.getSelectedItem())) {
+                if (p.getNombreProducto().equals(vistaInicioC.cboProductos.getSelectedItem())) {
 
                     detPed.setProducto(p);
-                    detPed.setCantidad(Integer.parseInt(frmInicioC.spnCantidad.getValue().toString()));
-                    frmInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
+                    detPed.setCantidad(Integer.parseInt(vistaInicioC.spnCantidad.getValue().toString()));
+                    vistaInicioC.lblPrecio.setText("S/. " + " " + p.getPrecio());
                     detPed.setImporte(p.getPrecio() * (double) detPed.getCantidad());
-                    frmInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
+                    vistaInicioC.lblImporte.setText("S/. " + " " + detPed.getImporte());
                 }
             });
         }
@@ -517,10 +559,10 @@ public class Controlador implements ActionListener, ChangeListener {
         ped.setSubtotal(subtotal);
         ped.setIgv(igv);
         ped.setTotal(total);
-        frmInicioC.lblSubtotal.setText("S/. " + String.valueOf(subtotal));
-        frmInicioC.lblIgv.setText("S/. " + String.valueOf(igv));
-        frmInicioC.lblTotal.setText("S/. " + String.valueOf(total));
-        frmInicioC.tblProdTienda.setModel(modelo);
+        vistaInicioC.lblSubtotal.setText("S/. " + String.valueOf(subtotal));
+        vistaInicioC.lblIgv.setText("S/. " + String.valueOf(igv));
+        vistaInicioC.lblTotal.setText("S/. " + String.valueOf(total));
+        vistaInicioC.tblProdTienda.setModel(modelo);
     }
 
     private void mostrarEmpTabla() {
@@ -539,7 +581,7 @@ public class Controlador implements ActionListener, ChangeListener {
             modelo.addRow(registros);
         }
 
-        frmInicioE.tblEmpleados.setModel(modelo);
+        vistaInicioE.tblEmpleados.setModel(modelo);
     }
 
     private void buscarEmpTabla(UsuarioEmpleado u) {
@@ -557,7 +599,7 @@ public class Controlador implements ActionListener, ChangeListener {
         registros[4] = u.getApellidos();
         modelo.addRow(registros);
 
-        frmInicioE.tblEmpleados.setModel(modelo);
+        vistaInicioE.tblEmpleados.setModel(modelo);
     }
 
     private void mostrarProTabla() {
@@ -575,7 +617,7 @@ public class Controlador implements ActionListener, ChangeListener {
             modelo.addRow(registros);
         }
 
-        frmInicioE.tblProductos.setModel(modelo);
+        vistaInicioE.tblProductos.setModel(modelo);
     }
 
     private void buscarProTabla(Producto p) {
@@ -593,39 +635,74 @@ public class Controlador implements ActionListener, ChangeListener {
         registros[4] = String.valueOf(p.getPrecio());
         modelo.addRow(registros);
 
-        frmInicioE.tblProductos.setModel(modelo);
+        vistaInicioE.tblProductos.setModel(modelo);
     }
 
     private boolean validarCamposRegistro() {
 
-        if (frmReg.txtUsuario.getText().isEmpty()) {
+        if (vistaReg.txtUsuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Usuario", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (frmReg.txtNombres.getText().isEmpty()) {
+        } else if (vistaReg.txtNombres.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Nombres", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (frmReg.txtApellidos.getText().isEmpty()) {
+        } else if (vistaReg.txtApellidos.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Apellidos", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (String.valueOf(frmReg.txtClave.getPassword()).isEmpty()) {
+        } else if (String.valueOf(vistaReg.txtClave.getPassword()).isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Clave", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (String.valueOf(frmReg.txtConfirmarClave.getPassword()).isEmpty()) {
+        } else if (String.valueOf(vistaReg.txtConfirmarClave.getPassword()).isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Confirmar Clave", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (String.valueOf(frmReg.txtClave.getPassword()).isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese Clave", "Error",
+        } else if (String.valueOf(vistaReg.txtDni.getText()).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese DNI", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (String.valueOf(frmReg.txtTelefono.getText()).isEmpty()) {
+        } else if (String.valueOf(vistaReg.txtTelefono.getText()).isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Teléfono", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (frmReg.txtDireccion.getText().isEmpty()) {
+        } else if (vistaReg.txtDireccion.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Dirección", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!esNumerico(frmReg.txtDni.getText())) {
+        } else if (!esNumerico(vistaReg.txtDni.getText())) {
             JOptionPane.showMessageDialog(null, "Ingrese un DNI con valor numérico", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!esNumerico(frmReg.txtTelefono.getText())) {
+        } else if (!esNumerico(vistaReg.txtTelefono.getText())) {
+            JOptionPane.showMessageDialog(null, "Ingrese un Teléfono con valor numérico", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validarCamposActualizacion() {
+
+        if (vistaInicioC.txtNombres.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese Nombres", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (vistaInicioC.txtApellidos.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese Apellidos", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (String.valueOf(vistaInicioC.txtClave.getPassword()).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese Clave", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (String.valueOf(vistaInicioC.txtConfirmarClave.getPassword()).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese Confirmar Clave", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (String.valueOf(vistaInicioC.txtDni.getText()).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese DNI", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (String.valueOf(vistaInicioC.txtTelefono.getText()).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese Teléfono", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (vistaInicioC.txtDireccion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese Dirección", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!esNumerico(vistaInicioC.txtDni.getText())) {
+            JOptionPane.showMessageDialog(null, "Ingrese un DNI con valor numérico", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!esNumerico(vistaInicioC.txtTelefono.getText())) {
             JOptionPane.showMessageDialog(null, "Ingrese un Teléfono con valor numérico", "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
@@ -635,14 +712,16 @@ public class Controlador implements ActionListener, ChangeListener {
     }
 
     public boolean validarCamposEmpleado() {
-
-        if (frmInicioE.txtClave.getText().isEmpty()) {
+        if (vistaInicioE.txtUsuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese Usuario", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (vistaInicioE.txtClave.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Clave", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (frmInicioE.txtNombres.getText().isEmpty()) {
+        } else if (vistaInicioE.txtNombres.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Nombres", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (frmInicioE.txtApellidos.getText().isEmpty()) {
+        } else if (vistaInicioE.txtApellidos.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Apellidos", "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
@@ -652,22 +731,19 @@ public class Controlador implements ActionListener, ChangeListener {
     }
 
     public boolean validarCamposProducto() {
-        if (frmInicioE.txtProducto.getText().isEmpty()) {
+        if (vistaInicioE.txtProducto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Producto", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (frmInicioE.txtCategoria.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese Categoría", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        } else if (frmInicioE.txtStock.getText().isEmpty()) {
+        } else if (vistaInicioE.txtStock.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Stock", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (frmInicioE.txtPrecio.getText().isEmpty()) {
+        } else if (vistaInicioE.txtPrecio.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Precio", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!esNumerico(frmInicioE.txtStock.getText())) {
+        } else if (!esNumerico(vistaInicioE.txtStock.getText())) {
             JOptionPane.showMessageDialog(null, "Ingrese un Stock válido", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!esNumerico(frmInicioE.txtPrecio.getText())) {
+        } else if (!esNumerico(vistaInicioE.txtPrecio.getText())) {
             JOptionPane.showMessageDialog(null, "Ingrese un Precio válido", "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
@@ -688,41 +764,40 @@ public class Controlador implements ActionListener, ChangeListener {
 
     private void limpiarRegistroCliente() {
 
-        frmReg.txtUsuario.setText("");
-        frmReg.txtClave.setText("");
-        frmReg.txtConfirmarClave.setText("");
-        frmReg.txtDni.setText("");
-        frmReg.txtTelefono.setText("");
-        frmReg.txtDireccion.setText("");
+        vistaReg.txtUsuario.setText("");
+        vistaReg.txtClave.setText("");
+        vistaReg.txtConfirmarClave.setText("");
+        vistaReg.txtDni.setText("");
+        vistaReg.txtTelefono.setText("");
+        vistaReg.txtDireccion.setText("");
     }
 
     private void limpiarLoginCliente() {
 
-        frmLoginC.txtUsuario.setText("");
-        frmLoginC.txtClave.setText("");
-        frmLoginC.lblMensajeInicio.setText("");
+        vistaLoginC.txtUsuario.setText("");
+        vistaLoginC.txtClave.setText("");
+        vistaLoginC.lblMensajeInicio.setText("");
     }
 
     private void limpiarLoginEmpleado() {
 
-        frmLoginE.txtCodEmpleado.setText("");
-        frmLoginE.txtClave.setText("");
-        frmLoginE.lblMensajeInicio.setText("");
+        vistaLoginE.txtCodEmpleado.setText("");
+        vistaLoginE.txtClave.setText("");
+        vistaLoginE.lblMensajeInicio.setText("");
     }
 
     public void limpiarCajasEmpleado() {
 
-        frmInicioE.txtIdEmpleado.setText("");
-        frmInicioE.txtNombres.setText("");
-        frmInicioE.txtApellidos.setText("");
-        frmInicioE.txtClave.setText("");
+        vistaInicioE.txtUsuario.setText("");
+        vistaInicioE.txtClave.setText("");
+        vistaInicioE.txtNombres.setText("");
+        vistaInicioE.txtApellidos.setText("");
     }
 
     public void limpiarCajasProducto() {
 
-        frmInicioE.txtProducto.setText("");
-        frmInicioE.txtCategoria.setText("");
-        frmInicioE.txtStock.setText("");
-        frmInicioE.txtPrecio.setText("");
+        vistaInicioE.txtProducto.setText("");
+        vistaInicioE.txtStock.setText("");
+        vistaInicioE.txtPrecio.setText("");
     }
 }
