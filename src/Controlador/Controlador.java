@@ -50,6 +50,7 @@ public class Controlador implements ActionListener, ChangeListener {
     private Categoria cat;
     private DAOCategoriaImpl catDao;
     private ArrayList<DetallePedido> listPedidos = new ArrayList<>();
+    private int idEmpleado;
 
     public Controlador(UsuarioCliente usuCli, DAOUsuarioClienteImpl usuCliDao, VistaLoginCliente vistaLoginC,
             VistaInicioCliente vistaInicioC, VistaRegistro vistaReg, UsuarioEmpleado usuEmp,
@@ -224,6 +225,7 @@ public class Controlador implements ActionListener, ChangeListener {
 
                 vistaLoginE.setVisible(false);
                 usuEmpDao.buscar(usuEmp);
+                idEmpleado = usuEmp.getIdEmpleado();
                 vistaInicioE.lblEmpleado.setText("Empleado - " + usuEmp.getNombres());
                 mostrarEmpTabla();
                 mostrarProTabla();
@@ -347,14 +349,17 @@ public class Controlador implements ActionListener, ChangeListener {
         if (e.getSource() == vistaInicioE.btnAgregarProducto) {
 
             if (validarCamposProducto()) {
-
+                // FIX ME
                 prod.setNombreProducto(vistaInicioE.txtProducto.getText());
                 cat.setNombre(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
                 catDao.buscarPorNombre(cat);
                 prod.setCategoria(cat);
+                System.out.println("Id Empleado " + idEmpleado);
+                usuEmp.setIdEmpleado(idEmpleado);
+                prod.setUsuarioEmpleado(usuEmp);
                 prod.setStock(Integer.parseInt(vistaInicioE.txtStock.getText()));
                 prod.setPrecio(Double.parseDouble(vistaInicioE.txtPrecio.getText()));
-
+                System.out.println("Producto " + prod.toString());
                 if (prodDao.crear(prod)) {
 
                     mostrarProTabla();

@@ -41,7 +41,7 @@ public class DAOUsuarioClienteImpl implements DAOUsuarioCliente {
     public boolean crear(UsuarioCliente usuarioCliente) {
 
         String consulta = "insert into cliente (Usuario, Nombres, Apellidos, Clave, Dni, Telefono, Direccion) "
-                + "values (?, ?, ?, ?, ?, ?, ?)";
+                + " values (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
@@ -72,7 +72,7 @@ public class DAOUsuarioClienteImpl implements DAOUsuarioCliente {
     @Override
     public boolean actualizar(UsuarioCliente usuarioCliente) {
         String consulta = "update cliente set Nombres = ?, Apellidos = ?, Clave = ?, Dni = ?, Telefono = ?, Direccion = ?"
-                + " where IdCliente = ?;";
+                + " where IdCliente = ?";
 
         try {
             String[] si_no = { "Sí", "No" };

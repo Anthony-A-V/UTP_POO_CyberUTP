@@ -16,8 +16,8 @@ public class DAOProductoImpl implements DAOProducto {
     public boolean crear(Producto producto) {
 
         String consulta = "insert into producto "
-                + "(NombreProducto, Stock, Precio, IdCategoria)"
-                + "values (?, ?, ?, ?)";
+                + "(NombreProducto, Stock, Precio, IdCategoria, IdEmpleado)"
+                + " values (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
@@ -25,8 +25,8 @@ public class DAOProductoImpl implements DAOProducto {
             pst.setInt(2, producto.getStock());
             pst.setDouble(3, producto.getPrecio());
             pst.setInt(4, producto.getCategoria().getIdCategoria());
+            pst.setInt(5, producto.getUsuarioEmpleado().getIdEmpleado());
             pst.execute();
-            System.out.println(pst);
             JOptionPane.showMessageDialog(null, "Producto registrado");
             return true;
         } catch (SQLException e) {
@@ -41,8 +41,8 @@ public class DAOProductoImpl implements DAOProducto {
     public boolean actualizar(Producto producto) {
 
         String consulta = "update producto set"
-                + " NombreProducto = ?, Stock = ?, Precio = ?,  IdCategoria = ?"
-                + " where IdProducto = ?;";
+                + " NombreProducto = ?, Stock = ?, Precio = ?,  IdCategoria = ?, IdEmpleado = ?"
+                + " where IdProducto = ?";
 
         try {
             String[] si_no = { "Sí", "No" };
@@ -54,7 +54,8 @@ public class DAOProductoImpl implements DAOProducto {
                 pst.setInt(2, producto.getStock());
                 pst.setDouble(3, producto.getPrecio());
                 pst.setInt(4, producto.getCategoria().getIdCategoria());
-                pst.setInt(5, producto.getIdProducto());
+                pst.setInt(5, producto.getUsuarioEmpleado().getIdEmpleado());
+                pst.setInt(6, producto.getIdProducto());
                 pst.execute();
                 return true;
             } else {
@@ -71,7 +72,7 @@ public class DAOProductoImpl implements DAOProducto {
     @Override
     public boolean eliminar(Producto producto) {
 
-        String consulta = "delete from producto where IdProducto = ?;";
+        String consulta = "delete from producto where IdProducto = ?";
 
         try {
             String[] si_no = { "Sí", "No" };
@@ -96,7 +97,7 @@ public class DAOProductoImpl implements DAOProducto {
     @Override
     public boolean buscar(Producto producto) {
 
-        String consulta = "select * from producto where IdProducto = ?;";
+        String consulta = "select * from producto where IdProducto = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
@@ -109,6 +110,7 @@ public class DAOProductoImpl implements DAOProducto {
                 producto.setStock(rs.getInt("Stock"));
                 producto.setPrecio(rs.getDouble("Precio"));
                 producto.getCategoria().setIdCategoria(rs.getInt("IdCategoria"));
+                producto.getUsuarioEmpleado().setIdEmpleado(rs.getInt("IdEmpleado"));
                 return true;
             }
             return false;
@@ -135,12 +137,14 @@ public class DAOProductoImpl implements DAOProducto {
                 Categoria cat = new Categoria();
                 UsuarioEmpleado usuEmp = new UsuarioEmpleado();
                 prod.setCategoria(cat);
+                prod.setUsuarioEmpleado(usuEmp);
 
                 prod.setIdProducto(rs.getInt("IdProducto"));
                 prod.setNombreProducto(rs.getString("NombreProducto"));
                 prod.setStock(Integer.parseInt(rs.getString("Stock")));
                 prod.setPrecio(Double.parseDouble(rs.getString("Precio")));
                 prod.getCategoria().setIdCategoria(rs.getInt("IdCategoria"));
+                prod.getUsuarioEmpleado().setIdEmpleado(rs.getInt("IdEmpleado"));
 
                 listProd.add(prod);
             }

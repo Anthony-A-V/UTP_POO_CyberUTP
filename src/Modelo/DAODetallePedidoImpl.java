@@ -13,9 +13,9 @@ public class DAODetallePedidoImpl implements DAODetallePedido {
     @Override
     public boolean crear(DetallePedido detPedido) {
 
-        String consulta = "insert into pedido_detalle "
-                + "(IdPedido, IdProducto, Cantidad, Importe)"
-                + "values (?,?,?,?)";
+        String consulta = "insert into pedido_detalle"
+                + " (IdPedido, IdProducto, Cantidad, Importe)"
+                + " values (?, ?, ?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(consulta);

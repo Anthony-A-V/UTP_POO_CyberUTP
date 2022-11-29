@@ -14,5 +14,6 @@ public class Producto extends Conexion {
     private double precio;
     private int stock;
     private Categoria categoria;
+    private UsuarioEmpleado usuarioEmpleado;
 
 }

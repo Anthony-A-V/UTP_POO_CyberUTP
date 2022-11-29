@@ -40,8 +40,8 @@ public class DAOUsuarioEmpleadoImpl {
 
     public boolean crear(UsuarioEmpleado usuarioEmpleado) {
 
-        String consulta = "insert into empleado (`Usuario`, `Clave`, `Nombres`, `Apellidos`) "
-                + "VALUES (?, ?, ?, ?)";
+        String consulta = "insert into empleado (`Usuario`, `Clave`, `Nombres`, `Apellidos`)"
+                + " values (?, ?, ?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
@@ -50,7 +50,6 @@ public class DAOUsuarioEmpleadoImpl {
             pst.setString(3, usuarioEmpleado.getNombres());
             pst.setString(4, usuarioEmpleado.getApellidos());
             pst.execute();
-            System.out.println(pst);
             JOptionPane.showMessageDialog(null, "Empleado registrado");
             return true;
         } catch (Exception e) {
