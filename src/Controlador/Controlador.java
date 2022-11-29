@@ -10,6 +10,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
+import Modelo.Categoria;
+import Modelo.DAOCategoriaImpl;
 import Modelo.DAODetallePedidoImpl;
 import Modelo.DAOPedidoImpl;
 import Modelo.DAOProductoImpl;
@@ -45,13 +47,15 @@ public class Controlador implements ActionListener, ChangeListener {
     private DAOPedidoImpl pedDao;
     private DetallePedido detPed;
     private DAODetallePedidoImpl detPedDao;
+    private Categoria cat;
+    private DAOCategoriaImpl catDao;
     private ArrayList<DetallePedido> listPedidos = new ArrayList<>();
 
     public Controlador(UsuarioCliente usuCli, DAOUsuarioClienteImpl usuCliDao, VistaLoginCliente vistaLoginC,
             VistaInicioCliente vistaInicioC, VistaRegistro vistaReg, UsuarioEmpleado usuEmp,
             DAOUsuarioEmpleadoImpl usuEmpDao, VistaLoginEmpleado vistaLoginE, VistaInicioEmpleado vistaInicioE,
             Producto prod, DAOProductoImpl prodDao, Pedido ped, DAOPedidoImpl pedDao, DetallePedido detPed,
-            DAODetallePedidoImpl detPedDao) {
+            DAODetallePedidoImpl detPedDao, Categoria cat, DAOCategoriaImpl catDao) {
         this.usuCli = usuCli;
         this.usuCliDao = usuCliDao;
         this.vistaLoginC = vistaLoginC;
@@ -67,6 +71,8 @@ public class Controlador implements ActionListener, ChangeListener {
         this.pedDao = pedDao;
         this.detPed = detPed;
         this.detPedDao = detPedDao;
+        this.cat = cat;
+        this.catDao = catDao;
         this.vistaLoginC.btnIniciarSesion.addActionListener(this);
         this.vistaLoginC.btnLoginEmpleado.addActionListener(this);
         this.vistaLoginC.btnRegistrarse.addActionListener(this);
@@ -104,6 +110,7 @@ public class Controlador implements ActionListener, ChangeListener {
 
             usuCli.setUsuario(vistaLoginC.txtUsuario.getText());
             usuCli.setClave(String.valueOf(vistaLoginC.txtClave.getPassword()));
+            prod.setCategoria(cat);
 
             if (usuCliDao.iniciarSesion(usuCli)) {
 
@@ -221,16 +228,24 @@ public class Controlador implements ActionListener, ChangeListener {
                 mostrarEmpTabla();
                 mostrarProTabla();
 
-                ICargarCombo lambda = () -> {
+                // Función Lambda 3
+                ICargarCombo lambda3 = () -> {
+                    int i = 0;
+                    int numCat = catDao.listar().size();
+                    String[] categorias = new String[numCat];
 
-                    String[] categoria = new String[2];
-                    categoria[0] = "Informática";
-                    categoria[1] = "Electrónica";
-                    DefaultComboBoxModel<String> comboModelo = new DefaultComboBoxModel<>(categoria);
+                    for (Categoria c : catDao.listar()) {
+                        categorias[i] = c.getNombre();
+                        i++;
+                    }
+                    DefaultComboBoxModel<String> comboModelo = new DefaultComboBoxModel<>(categorias);
                     vistaInicioE.cboCategoria.setModel(comboModelo);
                 };
-                lambda.cargarCombo();
-                prod.setCategoria(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                lambda3.cargarCombo();
+
+                cat.setNombre(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                catDao.buscarPorNombre(cat);
+                prod.setCategoria(cat);
                 vistaInicioE.setVisible(true);
 
             } else {
@@ -334,10 +349,11 @@ public class Controlador implements ActionListener, ChangeListener {
             if (validarCamposProducto()) {
 
                 prod.setNombreProducto(vistaInicioE.txtProducto.getText());
-                prod.setCategoria(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                cat.setNombre(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                catDao.buscarPorNombre(cat);
+                prod.setCategoria(cat);
                 prod.setStock(Integer.parseInt(vistaInicioE.txtStock.getText()));
                 prod.setPrecio(Double.parseDouble(vistaInicioE.txtPrecio.getText()));
-                prod.setUsuarioEmpleado(usuEmp);
 
                 if (prodDao.crear(prod)) {
 
@@ -372,7 +388,9 @@ public class Controlador implements ActionListener, ChangeListener {
             if (validarCamposProducto()) {
 
                 prod.setNombreProducto(vistaInicioE.txtProducto.getText());
-                prod.setCategoria(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                cat.setNombre(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
+                catDao.buscarPorNombre(cat);
+                prod.setCategoria(cat);
                 prod.setStock(Integer.parseInt(vistaInicioE.txtStock.getText()));
                 prod.setPrecio(Double.parseDouble(vistaInicioE.txtPrecio.getText()));
 
@@ -432,8 +450,8 @@ public class Controlador implements ActionListener, ChangeListener {
 
             if (dp.getCantidad() != 0) {
 
-                // Función Lambda 3
-                IPedidoExistente lambda3 = (detPed) -> {
+                // Función Lambda 4
+                IPedidoExistente lambda4 = (detPed) -> {
                     for (DetallePedido p : listPedidos) {
 
                         if (p.getProducto().getNombreProducto().equals(detPed.getProducto().getNombreProducto())) {
@@ -445,7 +463,7 @@ public class Controlador implements ActionListener, ChangeListener {
                     }
                     return false;
                 };
-                if (!lambda3.pedidoExistente(dp)) {
+                if (!lambda4.pedidoExistente(dp)) {
 
                     listPedidos.add(dp);
                 }
@@ -590,14 +608,15 @@ public class Controlador implements ActionListener, ChangeListener {
         String[] registros = new String[10];
         DefaultTableModel modelo = new DefaultTableModel(null, cabecera);
 
-        usuEmpDao.buscar(u);
+        if (usuEmpDao.buscar(u)) {
 
-        registros[0] = String.valueOf(u.getIdEmpleado());
-        registros[1] = u.getUsuario();
-        registros[2] = u.getClave();
-        registros[3] = u.getNombres();
-        registros[4] = u.getApellidos();
-        modelo.addRow(registros);
+            registros[0] = String.valueOf(u.getIdEmpleado());
+            registros[1] = u.getUsuario();
+            registros[2] = u.getClave();
+            registros[3] = u.getNombres();
+            registros[4] = u.getApellidos();
+            modelo.addRow(registros);
+        }
 
         vistaInicioE.tblEmpleados.setModel(modelo);
     }
@@ -609,9 +628,11 @@ public class Controlador implements ActionListener, ChangeListener {
         DefaultTableModel modelo = new DefaultTableModel(null, cabecera);
 
         for (Producto p : prodDao.listar()) {
+
             registros[0] = String.valueOf(p.getIdProducto());
             registros[1] = p.getNombreProducto();
-            registros[2] = p.getCategoria();
+            catDao.buscar(p.getCategoria());
+            registros[2] = p.getCategoria().getNombre();
             registros[3] = String.valueOf(p.getStock());
             registros[4] = String.valueOf(p.getPrecio());
             modelo.addRow(registros);
@@ -626,14 +647,17 @@ public class Controlador implements ActionListener, ChangeListener {
         String[] registros = new String[10];
         DefaultTableModel modelo = new DefaultTableModel(null, cabecera);
 
-        prodDao.buscar(p);
+        catDao.buscar(p.getCategoria());
 
-        registros[0] = String.valueOf(p.getIdProducto());
-        registros[1] = p.getNombreProducto();
-        registros[2] = p.getCategoria();
-        registros[3] = String.valueOf(p.getStock());
-        registros[4] = String.valueOf(p.getPrecio());
-        modelo.addRow(registros);
+        if (prodDao.buscar(p)) {
+
+            registros[0] = String.valueOf(p.getIdProducto());
+            registros[1] = p.getNombreProducto();
+            registros[2] = p.getCategoria().getNombre();
+            registros[3] = String.valueOf(p.getStock());
+            registros[4] = String.valueOf(p.getPrecio());
+            modelo.addRow(registros);
+        }
 
         vistaInicioE.tblProductos.setModel(modelo);
     }

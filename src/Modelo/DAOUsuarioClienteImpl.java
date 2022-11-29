@@ -123,8 +123,9 @@ public class DAOUsuarioClienteImpl implements DAOUsuarioCliente {
                 usuarioCliente.setDni(rs.getInt("Dni"));
                 usuarioCliente.setTelefono(rs.getInt("Telefono"));
                 usuarioCliente.setDireccion(rs.getString("Direccion"));
+                return true;
             }
-            return true;
+            return false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {

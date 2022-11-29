@@ -50,6 +50,7 @@ public class DAOUsuarioEmpleadoImpl {
             pst.setString(3, usuarioEmpleado.getNombres());
             pst.setString(4, usuarioEmpleado.getApellidos());
             pst.execute();
+            System.out.println(pst);
             JOptionPane.showMessageDialog(null, "Empleado registrado");
             return true;
         } catch (Exception e) {
@@ -121,15 +122,15 @@ public class DAOUsuarioEmpleadoImpl {
             PreparedStatement pst = con.prepareStatement(consulta);
             pst.setInt(1, usuarioEmpleado.getIdEmpleado());
             ResultSet rs = pst.executeQuery();
-
             while (rs.next()) {
                 usuarioEmpleado.setIdEmpleado(rs.getInt("IdEmpleado"));
                 usuarioEmpleado.setUsuario(rs.getString("Usuario"));
                 usuarioEmpleado.setClave(rs.getString("Clave"));
                 usuarioEmpleado.setNombres(rs.getString("Nombres"));
                 usuarioEmpleado.setApellidos(rs.getString("Apellidos"));
+                return true;
             }
-            return true;
+            return false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {

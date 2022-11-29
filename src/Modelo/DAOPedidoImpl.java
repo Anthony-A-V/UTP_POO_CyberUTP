@@ -62,8 +62,9 @@ public class DAOPedidoImpl implements DAOPedido {
             while (rs.next()) {
 
                 pedido.setIdPedido(rs.getInt("IdPedido"));
+                return true;
             }
-            return true;
+            return false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {

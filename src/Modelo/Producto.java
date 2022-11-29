@@ -11,9 +11,8 @@ public class Producto extends Conexion {
 
     private int idProducto;
     private String nombreProducto;
-    private String categoria;
     private double precio;
     private int stock;
-    private UsuarioEmpleado usuarioEmpleado;
+    private Categoria categoria;
 
 }

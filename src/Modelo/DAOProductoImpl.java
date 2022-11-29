@@ -16,17 +16,17 @@ public class DAOProductoImpl implements DAOProducto {
     public boolean crear(Producto producto) {
 
         String consulta = "insert into producto "
-                + "(NombreProducto, Categoria, Stock, Precio, IdEmpleado)"
-                + "values (?,?,?,?,?)";
+                + "(NombreProducto, Stock, Precio, IdCategoria)"
+                + "values (?, ?, ?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
             pst.setString(1, producto.getNombreProducto());
-            pst.setString(2, producto.getCategoria());
-            pst.setInt(3, producto.getStock());
-            pst.setDouble(4, producto.getPrecio());
-            pst.setInt(5, producto.getUsuarioEmpleado().getIdEmpleado());
+            pst.setInt(2, producto.getStock());
+            pst.setDouble(3, producto.getPrecio());
+            pst.setInt(4, producto.getCategoria().getIdCategoria());
             pst.execute();
+            System.out.println(pst);
             JOptionPane.showMessageDialog(null, "Producto registrado");
             return true;
         } catch (SQLException e) {
@@ -41,7 +41,7 @@ public class DAOProductoImpl implements DAOProducto {
     public boolean actualizar(Producto producto) {
 
         String consulta = "update producto set"
-                + " NombreProducto = ?, Categoria = ?, Stock = ?, Precio = ?"
+                + " NombreProducto = ?, Stock = ?, Precio = ?,  IdCategoria = ?"
                 + " where IdProducto = ?;";
 
         try {
@@ -51,9 +51,9 @@ public class DAOProductoImpl implements DAOProducto {
             if (valor == 0) {
                 PreparedStatement pst = con.prepareStatement(consulta);
                 pst.setString(1, producto.getNombreProducto());
-                pst.setString(2, producto.getCategoria());
-                pst.setInt(3, producto.getStock());
-                pst.setDouble(4, producto.getPrecio());
+                pst.setInt(2, producto.getStock());
+                pst.setDouble(3, producto.getPrecio());
+                pst.setInt(4, producto.getCategoria().getIdCategoria());
                 pst.setInt(5, producto.getIdProducto());
                 pst.execute();
                 return true;
@@ -106,11 +106,12 @@ public class DAOProductoImpl implements DAOProducto {
             while (rs.next()) {
                 producto.setIdProducto(rs.getInt("IdProducto"));
                 producto.setNombreProducto(rs.getString("NombreProducto"));
-                producto.setCategoria(rs.getString("Categoria"));
                 producto.setStock(rs.getInt("Stock"));
                 producto.setPrecio(rs.getDouble("Precio"));
+                producto.getCategoria().setIdCategoria(rs.getInt("IdCategoria"));
+                return true;
             }
-            return true;
+            return false;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {
@@ -131,12 +132,15 @@ public class DAOProductoImpl implements DAOProducto {
             while (rs.next()) {
 
                 Producto prod = new Producto();
+                Categoria cat = new Categoria();
+                UsuarioEmpleado usuEmp = new UsuarioEmpleado();
+                prod.setCategoria(cat);
 
                 prod.setIdProducto(rs.getInt("IdProducto"));
                 prod.setNombreProducto(rs.getString("NombreProducto"));
-                prod.setCategoria(rs.getString("Categoria"));
                 prod.setStock(Integer.parseInt(rs.getString("Stock")));
                 prod.setPrecio(Double.parseDouble(rs.getString("Precio")));
+                prod.getCategoria().setIdCategoria(rs.getInt("IdCategoria"));
 
                 listProd.add(prod);
             }
@@ -148,5 +152,4 @@ public class DAOProductoImpl implements DAOProducto {
         }
         return listProd;
     }
-
 }

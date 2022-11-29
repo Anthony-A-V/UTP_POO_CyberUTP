@@ -1,6 +1,8 @@
 package cyberutp;
 
 import Controlador.Controlador;
+import Modelo.Categoria;
+import Modelo.DAOCategoriaImpl;
 import Modelo.DAODetallePedidoImpl;
 import Modelo.DAOPedidoImpl;
 import Modelo.DAOProductoImpl;
@@ -35,10 +37,12 @@ public class CyberUTP {
         DAOPedidoImpl modPedDao = new DAOPedidoImpl();
         DetallePedido modDetPed = new DetallePedido();
         DAODetallePedidoImpl modDetPedDao = new DAODetallePedidoImpl();
+        Categoria modCat = new Categoria();
+        DAOCategoriaImpl modCatDao = new DAOCategoriaImpl();
 
         Controlador ctrl = new Controlador(modUsuCli, modUsuCliDao, vistaLoginC, vistaInicioC,
                 vistaReg, modUsuEmp, modUsuEmpDao, vistaLoginE, vistaInicioE, modProd, modProdDao, modPed, modPedDao,
-                modDetPed, modDetPedDao);
+                modDetPed, modDetPedDao, modCat, modCatDao);
         ctrl.iniciar();
         vistaLoginC.setVisible(true);
     }
