@@ -110,7 +110,7 @@ public class DAOProductoImpl implements DAOProducto {
                 producto.setStock(rs.getInt("Stock"));
                 producto.setPrecio(rs.getDouble("Precio"));
                 producto.getCategoria().setIdCategoria(rs.getInt("IdCategoria"));
-                producto.getUsuarioEmpleado().setIdEmpleado(rs.getInt("IdEmpleado"));
+                //producto.getUsuarioEmpleado().setIdEmpleado(rs.getInt("IdEmpleado"));
                 return true;
             }
             return false;

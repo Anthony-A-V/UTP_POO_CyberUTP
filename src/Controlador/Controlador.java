@@ -349,7 +349,6 @@ public class Controlador implements ActionListener, ChangeListener {
         if (e.getSource() == vistaInicioE.btnAgregarProducto) {
 
             if (validarCamposProducto()) {
-                // FIX ME
                 prod.setNombreProducto(vistaInicioE.txtProducto.getText());
                 cat.setNombre(String.valueOf(vistaInicioE.cboCategoria.getSelectedItem()));
                 catDao.buscarPorNombre(cat);
